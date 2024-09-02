@@ -45,8 +45,8 @@
 <body>
     <div class="options-container">
         <h2 class="options-title">Opciones</h2>
-        <button class="btn btn-oval">INGRESAR CLIENTE</button>
-        <button class="btn btn-oval">VER CLIENTES</button>
+        <button onclick="window.location.href='ingreso.php'" class="btn btn-oval">INGRESAR CLIENTE</button>
+        <button onclick="window.location.href='history.php'" class="btn btn-oval">VER CLIENTES</button>
     </div>
 
     <!-- Bootstrap JS -->
