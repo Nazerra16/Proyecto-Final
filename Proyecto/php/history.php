@@ -6,55 +6,12 @@
     <title>Historial de Clientes - Lavadero de Autos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #e0f7fa; /* Azul claro como el agua */
-        }
-        .history-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-            width: 100%;
-            border-left: 10px solid #ffeb3b; /* Borde amarillo para la señal de alerta */
-        }
-        .history-title {
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-align: center;
-            color: #0277bd; /* Azul profundo para el texto */
-        }
-        .table th, .table td {
-            vertical-align: middle;
-        }
-        .btn-custom {
-            background-color: #0288d1; /* Azul lavado de autos */
-            color: white;
-            font-weight: bold;
-        }
-        .btn-custom-danger {
-            background-color: #ff5722; /* Naranja para el botón de finalizar lavado */
-            color: white;
-            font-weight: bold;
-        }
-        .alert-sign {
-            display: block;
-            text-align: center;
-            font-size: 24px;
-            color: #ff5722; /* Naranja de señal de alerta */
-            margin-bottom: 15px;
-        }
-        .alert-sign i {
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/history.css">
 </head>
 <body>
+    <div class="back-button">
+        <a href="options.php" class="btn btn-custom">Volver al inicio</a>
+    </div>
     <div class="history-container">
         <div class="alert-sign">
             <i class="bi bi-exclamation-triangle-fill"></i>
