@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/history.css">
+    <link rel="stylesheet" href="../Proyecto/css/history.css">
 </head>
 <body>
     <div class="back-button">
