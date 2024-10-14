@@ -19,7 +19,7 @@
             <i class="bi bi-exclamation-triangle-fill"></i>
         </div>
         <h2 class="history-title">Registro de Clientes</h2>
-        <table id="clientesTable" class="table table-striped">
+        <table id="clientesTabla" class="table table-striped">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -30,49 +30,14 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Juan</td>
-                    <td>Pérez</td>
-                    <td>juan.perez@ejemplo.com</td>
-                    <td>+54 9 1234 5678</td>
-                    <td>ABC123</td>
+            <!-- <tbody>
                     <td>
                         <button class="btn btn-custom btn-sm">Iniciar lavado</button>
                         <button class="btn btn-custom-danger btn-sm">Finalizar lavado</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Ana</td>
-                    <td>Gómez</td>
-                    <td>ana.gomez@ejemplo.com</td>
-                    <td>+54 9 2345 6789</td>
-                    <td>XYZ789</td>
-                    <td>
-                        <button class="btn btn-custom btn-sm">Iniciar lavado</button>
-                        <button class="btn btn-custom-danger btn-sm">Finalizar lavado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Pedro</td>
-                    <td>Martínez</td>
-                    <td>pedro.martinez@ejemplo.com</td>
-                    <td>+54 9 3456 7890</td>
-                    <td>MNO456</td>
-                    <td>
-                        <button class="btn btn-custom btn-sm">Iniciar lavado</button>
-                        <button class="btn btn-custom-danger btn-sm">Finalizar lavado</button>
-                    </td>
-                </tr>
-                <!-- Más filas de clientes -->
-            </tbody>
+            </tbody> -->
         </table>
-        <div class="d-flex justify-content-between mt-3">
-            <div>
-                <button id="prevPage" class="btn btn-secondary">Anterior</button>
-                <button id="nextPage" class="btn btn-secondary">Siguiente</button>
-            </div>
-        </div>
     </div>
 
     <!-- Bootstrap Icons -->
@@ -85,13 +50,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-            const table = $('#clientesTable').DataTable({
+            const table = $('#clientesTabla').DataTable({
+                "ajax": "bd.php",  // El archivo PHP que devuelve los datos
+            "columns": [
+            { "data": "nombre" },
+            { "data": "apellido" },
+            { "data": "email" },
+            { "data": "telefono" },
+            { "data": "patente" }
+        ],
                 "ordering": false,
                 "paging": true,
                 "lengthChange": false,
                 "pageLength": 5, // Cambiar el número de filas por página según lo necesites
                 "info": false,
                 "searching": true, // Desactiva el buscador de arriba
+                "language": {
+                    "search": "Filtrar",
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente"}
+                    }
             });
 
             $('#filterInput').on('keyup', function() {
