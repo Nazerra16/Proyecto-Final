@@ -19,12 +19,12 @@
             <i class="bi bi-exclamation-triangle-fill"></i>
         </div>
         <h2 class="history-title">Registro de Clientes</h2>
-        <table id="clientesTabla" class="table table-striped">
+        <table id="clientesTabla" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Correo Electrónico</th>
+                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>Patente</th>
                     <th>Acciones</th>
@@ -51,7 +51,7 @@
     <script>
         $(document).ready(function() {
             const table = $('#clientesTabla').DataTable({
-                "ajax": "bd.php",  // El archivo PHP que devuelve los datos
+                "ajax": "getClientes.php",  // El archivo PHP que devuelve los datos
             "columns": [
             { "data": "nombre" },
             { "data": "apellido" },
