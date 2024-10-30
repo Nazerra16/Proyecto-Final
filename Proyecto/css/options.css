@@ -3,31 +3,34 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #e0f7fa; /* Azul claro como el agua */
+    background-color: #4bc3fc;
+    margin: 0;
 }
-.options-container {
-    background-color: #ffffff;
+.opciones-cont {
+    background-color: #f3fbff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    width: 100%;
-    border-left: 10px solid #ffeb3b; /* Borde amarillo para la señal de alerta */
+    border-left: 10px solid #ffeb3b;
     text-align: center;
 }
 .options-title {
-    margin-bottom: 30px;
     font-weight: bold;
-    text-align: center;
-    color: #0277bd; /* Azul profundo para el texto */
+    color: #0277bd;
+    margin-bottom: 20px;
 }
 .btn-oval {
-    background-color: #0288d1; /* Azul lavado de autos */
-    color: white;
-    font-weight: bold;
-    padding: 20px 40px;
-    border-radius: 50px; /* Botón ovalado */
-    font-size: 20px;
-    margin: 10px 0;
     width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #0288d1;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.3s;
+}
+.btn-oval:hover {
+    background-color: #4bc3fc;
 }
