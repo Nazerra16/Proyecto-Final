@@ -1,10 +1,15 @@
 <?php
 include 'bd.php';
 
+session_start();
+
+if(isset($_SESSION['usuario'])){
+    header("Location: options.php");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST['usuario'];
-    $contraseña = $_POST['contraseña'];
-    
+    $contraseña = sha1($_POST['contraseña']);    
 
     //Consulta SQL para verificar las credenciales con las de la BD
     

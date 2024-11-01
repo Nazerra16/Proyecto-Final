@@ -1,3 +1,12 @@
+
+
+<?php
+session_start();
+
+if(!$_SESSION['usuario']){
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,6 +21,7 @@
 
         <button onclick="location.href='ingreso.php'" class="btn btn-oval">INGRESAR CLIENTE</button>
         <button onclick="location.href='history.php'" class="btn btn-oval">VER CLIENTES</button>
+        <a href='logout.php' class="btn btn-oval">LOGOUT</a>
 
     </div>
 </body>
