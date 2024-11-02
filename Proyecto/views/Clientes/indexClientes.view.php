@@ -3,127 +3,195 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Clientes - Lavadero</title>
+    <title>Gestión de Clientes - DANG Aviso</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #4bc3fc;
+            --hover-color: #3ab1e8;
+        }
+
         body {
-            background-color: #4bc3fc;
-            padding: 20px;
+            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding-top: 20px;
         }
 
-        .table-container {
-            background-color: #f3fbff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            border-left: 10px solid #ffeb3b;
-            margin: 40px auto;
+        .main-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
         }
 
-        .table {
-            margin-bottom: 0;
+        .page-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
         }
 
         .btn-action {
-            margin: 0 5px;
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--hover-color), var(--primary-color));
+            transform: translateY(-2px);
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+            color: white;
+        }
+
+        .table th {
+            font-weight: 500;
+            padding: 1rem;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .btn-sm {
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+            color: white;
+            border-radius: 20px 20px 0 0;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="table-container">
+        <div class="main-container">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Clientes Registrados</h2>
+                <h2 class="page-title">
+                    <i class="fas fa-users me-2"></i>
+                    Gestión de Clientes
+                </h2>
                 <div class="d-flex gap-2">
-                    <a href="../dashboard.php" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Volver al Dashboard
+                    <a href="../dashboard.php" class="btn btn-secondary btn-action">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Volver al Dashboard
                     </a>
-                    <a href="createClientes.php" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Nuevo Cliente
+                    <a href="createClientes.php" class="btn btn-primary btn-action">
+                        <i class="fas fa-plus me-2"></i>
+                        Nuevo Cliente
                     </a>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Telefono</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($clientesConPatentes)): ?>
-                        <?php foreach ($clientesConPatentes as $cliente): ?>
-                            <?php if ($cliente !== null): ?>
-                                <tr>
-                                    <td><?= $cliente->ID_Clientes ?></td>
-                                    <td><?= $cliente->Nombre ?></td>
-                                    <td><?= $cliente->Apellido ?></td>
-                                    <td><?= $cliente->Email ?></td>
-                                    <td><?= $cliente->Telefono ?></td>
-                                    <td>
-                                        <a href="updateClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-warning btn-sm btn-action">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="deleteClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('¿Está seguro de eliminar este cliente?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#patentesModal<?= $cliente->ID_Clientes ?>">
-                                            Ver Patentes
-                                        </button>
-                                        <a href="asignarPatente.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-success btn-sm btn-action">
-                                            Asignar Patente
-                                        </a>
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td colspan="6">No hay clientes para mostrar.</td>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Acciones</th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Modals para mostrar patentes -->
-    <?php foreach ($clientesConPatentes as $cliente): ?>
-        <div class="modal fade" id="patentesModal<?= $cliente->ID_Clientes ?>" tabindex="-1" aria-labelledby="patentesModalLabel<?= $cliente->ID_Clientes ?>" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="patentesModalLabel<?= $cliente->ID_Clientes ?>">Patentes de <?= $cliente->Nombre ?> <?= $cliente->Apellido ?></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <?php if (!empty($cliente->patentes)): ?>
-                            <ul>
-                                <?php foreach ($cliente->patentes as $patente): ?>
-                                    <li><?= $patente->Patente ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($clientesConPatentes)): ?>
+                            <?php foreach ($clientesConPatentes as $cliente): ?>
+                                <?php if ($cliente !== null): ?>
+                                    <tr>
+                                        <td><?= $cliente->ID_Clientes ?></td>
+                                        <td><?= $cliente->Nombre ?></td>
+                                        <td><?= $cliente->Apellido ?></td>
+                                        <td><?= $cliente->Email ?></td>
+                                        <td><?= $cliente->Telefono ?></td>
+                                        <td>
+                                            <a href="updateClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="deleteClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este cliente?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#patentesModal<?= $cliente->ID_Clientes ?>">
+                                                <i class="fas fa-car me-1"></i> Ver Patentes
+                                            </button>
+                                            <a href="asignarPatente.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-success btn-sm">
+                                                <i class="fas fa-plus me-1"></i> Asignar Patente
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         <?php else: ?>
-                            <p>Este cliente no tiene patentes asignadas.</p>
+                            <tr>
+                                <td colspan="6" class="text-center">No hay clientes registrados.</td>
+                            </tr>
                         <?php endif; ?>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal para ver patentes -->
+            <?php foreach ($clientesConPatentes as $cliente): ?>
+                <div class="modal fade" id="patentesModal<?= $cliente->ID_Clientes ?>" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">
+                                    <i class="fas fa-car me-2"></i>
+                                    Patentes de <?= $cliente->Nombre ?> <?= $cliente->Apellido ?>
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <?php if (!empty($cliente->patentes)): ?>
+                                    <ul class="list-group list-group-flush">
+                                        <?php foreach ($cliente->patentes as $patente): ?>
+                                            <li class="list-group-item">
+                                                <?= $patente->Patente ?>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <p>No hay patentes asignadas a este cliente.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    <?php endforeach; ?>
-
-    <!-- Bootstrap JS y Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+            <?php endforeach; ?>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
