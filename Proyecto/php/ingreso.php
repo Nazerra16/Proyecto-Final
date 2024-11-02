@@ -9,10 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    //Se toman los valores del formu
     $telefono = $_POST['telefono'];
     $patente = $_POST['patente'];
 
+    
+
 
                     // Inserta los datos en la tabla clientes de la BD
 
-    $query = "INSERT INTO clientes (nombre, apellido, email, telefono, patente) VALUES ('$nombre', '$apellido', '$email', '$telefono', '$patente')";
+    $query = "INSERT INTO clientes (nombre, apellido, email, telefono) VALUES ('$nombre', '$apellido', '$email', '$telefono')";
+
+
     
     if ($conn->query($query) === TRUE) {    //Si la consulta se ejecuta bien lo dice, de lo contrario tira el error
         echo "Cliente ingresado correctamente";

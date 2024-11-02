@@ -4,7 +4,7 @@ include 'bd.php';
 
 //Se obtienen los datos de la tabla Clientes, para luego mostrarlos
 
-$query = "SELECT id, nombre, apellido, email, telefono, patente FROM clientes";
+$query = "SELECT id, nombre, apellido, email, telefono, v.patente FROM clientes c JOIN vehiculos v ON v.id_vehiculo = c.id";
 $result = $conn->query($query);
 ?>
 
