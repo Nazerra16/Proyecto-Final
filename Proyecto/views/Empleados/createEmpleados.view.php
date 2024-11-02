@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Registrar Nuevo Empleado</title>
@@ -9,28 +10,35 @@
             background-color: #4bc3fc;
             padding: 20px;
         }
+
         .form-container {
             background-color: #f3fbff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             border-left: 10px solid #ffeb3b;
             max-width: 600px;
             margin: 40px auto;
         }
+
         .btn-primary {
             background-color: #0288d1;
             border: none;
         }
+
         .btn-primary:hover {
             background-color: #4bc3fc;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
             <h2 class="text-center mb-4">Registrar Nuevo Empleado</h2>
+            <div class="alert alert-info">
+                Bienvenido al sistema. Por favor, complete sus datos como empleado para continuar.
+            </div>
             <form action="createEmpleados.php" method="POST">
                 <div class="mb-3">
                     <label for="Nombre" class="form-label">Nombre</label>
@@ -52,4 +60,5 @@
         </div>
     </div>
 </body>
+
 </html>

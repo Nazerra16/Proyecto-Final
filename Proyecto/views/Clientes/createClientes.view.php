@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Registrar Nuevo Cliente</title>
@@ -9,24 +10,28 @@
             background-color: #4bc3fc;
             padding: 20px;
         }
+
         .form-container {
             background-color: #f3fbff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             border-left: 10px solid #ffeb3b;
             max-width: 600px;
             margin: 40px auto;
         }
+
         .btn-primary {
             background-color: #0288d1;
             border: none;
         }
+
         .btn-primary:hover {
             background-color: #4bc3fc;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
@@ -46,7 +51,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Telefono" class="form-label">Telefono</label>
-                    <input type= "" class="form-control" id="Telefono" name="Telefono" required>
+                    <input type="" class="form-control" id="Telefono" name="Telefono" required>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary" name="crearCliente">Registrar Cliente</button>
@@ -56,4 +61,5 @@
         </div>
     </div>
 </body>
+
 </html>

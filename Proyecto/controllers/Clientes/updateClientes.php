@@ -8,14 +8,14 @@ if (isset($_POST['actualizarDatos'])) { //si se aprieta el boton  de actualizar
     $nombre = $_POST['Nombre'];
     $apellido = $_POST['Apellido'];
     $email = $_POST['Email'];
-    $telefono=$_POST['Telefono'];
+    $telefono = $_POST['Telefono'];
 
     //buscamos por el metodo estatico al Cliente a editar
     $cliente = Cliente::getById($id);
     $cliente->Nombre = $nombre;
     $cliente->Apellido = $apellido;
     $cliente->Email = $email;
-    $cliente->Telefono=$telefono;
+    $cliente->Telefono = $telefono;
     $cliente->update(); //lo actualizamos con los datos escritos en las variables de arriba
 
     header('Location: indexClientes.php');

@@ -36,9 +36,14 @@
         <div class="table-container">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2>Clientes Registrados</h2>
-                <a href="createClientes.php" class="btn btn-primary">
-                    <i class="bi bi-plus-circle"></i> Nuevo Cliente
-                </a>
+                <div class="d-flex gap-2">
+                    <a href="../dashboard.php" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Volver al Dashboard
+                    </a>
+                    <a href="createClientes.php" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Nuevo Cliente
+                    </a>
+                </div>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -52,30 +57,73 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($cliente as $clientes): ?>
+                    <?php if (!empty($clientesConPatentes)): ?>
+                        <?php foreach ($clientesConPatentes as $cliente): ?>
+                            <?php if ($cliente !== null): ?>
+                                <tr>
+                                    <td><?= $cliente->ID_Clientes ?></td>
+                                    <td><?= $cliente->Nombre ?></td>
+                                    <td><?= $cliente->Apellido ?></td>
+                                    <td><?= $cliente->Email ?></td>
+                                    <td><?= $cliente->Telefono ?></td>
+                                    <td>
+                                        <a href="updateClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-warning btn-sm btn-action">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="deleteClientes.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('¿Está seguro de eliminar este cliente?')">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#patentesModal<?= $cliente->ID_Clientes ?>">
+                                            Ver Patentes
+                                        </button>
+                                        <a href="asignarPatente.php?id=<?= $cliente->ID_Clientes ?>" class="btn btn-success btn-sm btn-action">
+                                            Asignar Patente
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <tr>
-                            <td><?= $clientes->ID_Clientes ?></td>
-                            <td><?= $clientes->Nombre ?></td>
-                            <td><?= $clientes->Apellido ?></td>
-                            <td><?= $clientes->Email ?></td>
-                            <td><?= $clientes->Telefono ?></td>
-                            <td>
-                                <a href="updateClientes.php?id=<?= $clientes->ID_Clientes ?>" class="btn btn-warning btn-sm btn-action">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="deleteClientes.php?id=<?= $clientes->ID_Clientes ?>" class="btn btn-danger btn-sm btn-action" onclick="return confirm('¿Está seguro de eliminar este cliente?')">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                                <a href="asignarPatente.php?id=<?= $clientes->ID_Clientes ?>" class="btn btn-info btn-sm btn-action">
-                                    <i class="bi bi-car-front"></i> Asignar Patente
-                                </a>
-                            </td>
+                            <td colspan="6">No hay clientes para mostrar.</td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <!-- Modals para mostrar patentes -->
+    <?php foreach ($clientesConPatentes as $cliente): ?>
+        <div class="modal fade" id="patentesModal<?= $cliente->ID_Clientes ?>" tabindex="-1" aria-labelledby="patentesModalLabel<?= $cliente->ID_Clientes ?>" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="patentesModalLabel<?= $cliente->ID_Clientes ?>">Patentes de <?= $cliente->Nombre ?> <?= $cliente->Apellido ?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?php if (!empty($cliente->patentes)): ?>
+                            <ul>
+                                <?php foreach ($cliente->patentes as $patente): ?>
+                                    <li><?= $patente->Patente ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <p>Este cliente no tiene patentes asignadas.</p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+
+    <!-- Bootstrap JS y Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

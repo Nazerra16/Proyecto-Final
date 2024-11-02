@@ -1,32 +1,32 @@
 <?php
 require_once 'Conexion.php';
 
-class Empleado extends Conexion{
-    public $ID_Empleado, $Nombre, $Apellido, $Telefono;
+class Empleado extends Conexion
+{
+    public $ID_Empleado, $Nombre, $Apellido, $Telefono, $ID_Usuario;
 
-    public function create() // Método para crear un nuevo empleado
+    public function create()
     {
         $this->conectar();
-        $pre = mysqli_prepare($this->con, "INSERT INTO empleados (Nombre, Apellido, Telefono) VALUES (?, ?, ?)");
-        $pre->bind_param("ssi", $this->Nombre, $this->Apellido,  $this->Telefono);
-
-        $pre->execute();
+        $pre = mysqli_prepare($this->con, "INSERT INTO empleados (Nombre, Apellido, Telefono, ID_Usuario) VALUES (?, ?, ?, ?)");
+        $pre->bind_param("sssi", $this->Nombre, $this->Apellido, $this->Telefono, $this->ID_Usuario);
+        return $pre->execute();
     }
 
-    public function delete(){// Método para eliminar un empleado
+    public function delete()
+    { // Método para eliminar un empleado
 
         $this->conectar();
         $pre = mysqli_prepare($this->con, "DELETE FROM empleados WHERE ID_Empleado =  ?");
         $pre->bind_param("i", $this->ID_Empleado);
         $pre->execute();
-
     }
 
-    public function update() // Método para actualizar un empleado
+    public function update()
     {
         $this->conectar();
-        $pre = mysqli_prepare($this->con, "UPDATE empleados SET Nombre = ?, Apellido = ?, Telefono = ? WHERE id = ?");
-        $pre->bind_param("ssii", $this->Nombre, $this->Apellido, $this->Telefono, $this->ID_Empleado);
+        $pre = mysqli_prepare($this->con, "UPDATE empleados SET Nombre = ?, Apellido = ?, Telefono = ? WHERE ID_Empleado = ?");
+        $pre->bind_param("sssi", $this->Nombre, $this->Apellido, $this->Telefono, $this->ID_Empleado);
         $pre->execute();
     }
 

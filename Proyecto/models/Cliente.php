@@ -10,16 +10,26 @@ class Cliente extends Conexion
         $this->conectar();
         $pre = mysqli_prepare($this->con, "INSERT INTO clientes (Nombre, Apellido, Email, Telefono) VALUES (?, ?, ?, ?)");
         $pre->bind_param("sssi", $this->Nombre, $this->Apellido, $this->Email, $this->Telefono);
-        $pre->execute();
+        if ($pre->execute()) {
+            return $this->con->insert_id;
+        }
+        return false;
     }
 
     public function delete()
-    {
-        $this->conectar();
-        $pre = mysqli_prepare($this->con, "DELETE FROM clientes WHERE ID_Clientes = ?");
-        $pre->bind_param("i", $this->ID_Clientes);
-        $pre->execute();
-    }
+{
+    $this->conectar();
+    
+    // Primero eliminamos los vehículos asociados al cliente
+    $pre = mysqli_prepare($this->con, "DELETE FROM vehiculos WHERE ID_Clientes = ?");
+    $pre->bind_param("i", $this->ID_Clientes);
+    $pre->execute();
+    
+    // Luego eliminamos al cliente
+    $pre = mysqli_prepare($this->con, "DELETE FROM clientes WHERE ID_Clientes = ?");
+    $pre->bind_param("i", $this->ID_Clientes);
+    $pre->execute();
+}
 
     public function update()
     {
@@ -30,18 +40,18 @@ class Cliente extends Conexion
     }
 
     public static function all()
-    {
-        $conexion = new Conexion();
-        $conexion->conectar();
-        $result = mysqli_prepare($conexion->con, "SELECT * FROM clientes");
-        $result->execute();
-        $valoresDb = $result->get_result();
-        $Clientes = [];
-        while ($cliente = $valoresDb->fetch_object(Cliente::class)) {
-            $Clientes[] = $cliente;
-        }
-        return $Clientes;
+{
+    $conexion = new Conexion();
+    $conexion->conectar();
+    $result = mysqli_prepare($conexion->con, "SELECT * FROM clientes");
+    $result->execute();
+    $valoresDb = $result->get_result();
+    $Clientes = [];
+    while ($cliente = $valoresDb->fetch_object(Cliente::class)) {
+        $Clientes[] = $cliente;
     }
+    return $Clientes;
+}
 
     public static function getById($id)
     {
