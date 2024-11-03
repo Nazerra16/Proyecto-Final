@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require 'C:/xampp/htdocs/Proyecto-Final/vendor/autoload.php';
 
 class EmailSender {
     public static function sendEmail($to, $subject, $body) {
@@ -11,15 +11,15 @@ class EmailSender {
         try {
             //Server settings
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // Cambia esto al servidor SMTP que uses
+            $mail->Host       = 'sandbox.smtp.mailtrap.io'; // Cambia esto al servidor SMTP que uses
             $mail->SMTPAuth   = true;
-            $mail->Username   = ''; // poner email para enviar correos
-            $mail->Password   = ''; // poner la contraseña
+            $mail->Username   = '8058f33ac0b99a'; // poner email para enviar correos
+            $mail->Password   = '3608f0888607b9'; // poner la contraseña
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            $mail->Port       = 2525;
 
             //Recipients
-            $mail->setFrom('', 'DANG Aviso');
+            $mail->setFrom('algo@gmail.com', 'DANG Aviso');
             $mail->addAddress($to);
 
             // Content

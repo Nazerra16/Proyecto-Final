@@ -44,7 +44,7 @@ class Vehiculo extends Conexion
 {
     $this->conectar();
     // Primero eliminamos los lavados asociados al vehículo si existen
-    $pre = mysqli_prepare($this->con, "DELETE FROM limpiezas WHERE ID_Vehiculo = ?");
+    $pre = mysqli_prepare($this->con, "DELETE FROM lavados WHERE ID_Vehiculo = ?");
     $pre->bind_param("i", $this->ID_Vehiculo);
     $pre->execute();
     

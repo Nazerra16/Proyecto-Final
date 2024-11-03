@@ -1,4 +1,7 @@
 <?php
+
+require_once 'Conexion.php';
+
 class Lavado extends Conexion
 {
     public $ID_Limpieza, $ID_Vehiculo, $ID_Empleado, $Inicio, $Fin;
