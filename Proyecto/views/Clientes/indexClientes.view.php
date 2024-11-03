@@ -75,21 +75,34 @@
             vertical-align: middle;
         }
 
+        .btn-group .btn {
+            margin: 0 2px;
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+        }
+
         .btn-sm {
-            border-radius: 20px;
-            padding: 0.5rem 1rem;
-            margin: 0 0.2rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
         }
 
         .modal-content {
-            border-radius: 20px;
-            border: none;
+            border-radius: 15px;
         }
 
         .modal-header {
             background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
             color: white;
-            border-radius: 20px 20px 0 0;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
@@ -178,8 +191,27 @@
                                 <?php if (!empty($cliente->patentes)): ?>
                                     <ul class="list-group list-group-flush">
                                         <?php foreach ($cliente->patentes as $patente): ?>
-                                            <li class="list-group-item">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <?= $patente->Patente ?>
+                                                <div class="btn-group">
+                                                    <?php $lavadoActivo = Lavado::getLavadoActivo($patente->ID_Vehiculo); ?>
+                                                    <?php if ($lavadoActivo): ?>
+                                                        <a href="finalizarLavado.php?id=<?= $lavadoActivo->ID_Limpieza ?>&cliente=<?= $cliente->ID_Clientes ?>"
+                                                            class="btn btn-warning btn-sm">
+                                                            Finalizar Lavado
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <a href="iniciarLavado.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>"
+                                                            class="btn btn-primary btn-sm">
+                                                            Iniciar Lavado
+                                                        </a>
+                                                    <?php endif; ?>
+                                                    <a href="deletePatente.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('¿Está seguro de eliminar esta patente?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>

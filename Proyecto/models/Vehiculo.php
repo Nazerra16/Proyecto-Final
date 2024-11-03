@@ -27,4 +27,30 @@ class Vehiculo extends Conexion
         }
         return $vehiculos;
     }
+
+    public static function getById($id)
+    {
+        $conexion = new Conexion();
+        $conexion->conectar();
+        $result = mysqli_prepare($conexion->con, "SELECT * FROM vehiculos WHERE ID_Vehiculo = ?");
+        $result->bind_param("i", $id);
+        $result->execute();
+        $valorDb = $result->get_result();
+        $vehiculo = $valorDb->fetch_object(Vehiculo::class);
+        return $vehiculo;
+    }
+
+    public function delete()
+{
+    $this->conectar();
+    // Primero eliminamos los lavados asociados al vehículo si existen
+    $pre = mysqli_prepare($this->con, "DELETE FROM limpiezas WHERE ID_Vehiculo = ?");
+    $pre->bind_param("i", $this->ID_Vehiculo);
+    $pre->execute();
+    
+    // Luego eliminamos el vehículo
+    $pre = mysqli_prepare($this->con, "DELETE FROM vehiculos WHERE ID_Vehiculo = ?");
+    $pre->bind_param("i", $this->ID_Vehiculo);
+    return $pre->execute();
+}
 }

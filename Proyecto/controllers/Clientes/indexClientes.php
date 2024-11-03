@@ -1,6 +1,7 @@
 <?php
 require_once "../../models/Cliente.php";
 require_once "../../models/Vehiculo.php";
+require_once "../../models/Lavado.php";
 
 $clientes = Cliente::all();
 $clientesConPatentes = [];

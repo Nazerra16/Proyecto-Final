@@ -1,6 +1,4 @@
 <?php
-require_once 'Conexion.php';
-
 class Lavado extends Conexion
 {
     public $ID_Limpieza, $ID_Vehiculo, $ID_Empleado, $Inicio, $Fin;
@@ -27,6 +25,17 @@ class Lavado extends Conexion
         $conexion->conectar();
         $stmt = mysqli_prepare($conexion->con, "SELECT * FROM lavados WHERE ID_Vehiculo = ? AND Fin IS NULL");
         $stmt->bind_param("i", $id_vehiculo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_object(Lavado::class);
+    }
+
+    public static function getById($id_lavado)
+    {
+        $conexion = new Conexion();
+        $conexion->conectar();
+        $stmt = mysqli_prepare($conexion->con, "SELECT * FROM lavados WHERE ID_Limpieza = ?");
+        $stmt->bind_param("i", $id_lavado);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_object(Lavado::class);

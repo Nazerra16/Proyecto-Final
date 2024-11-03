@@ -15,11 +15,10 @@ if (isset($_POST['crearCliente'])) {
     $id_cliente = $cliente->create();
 
     if ($id_cliente) {
-        // Redirigir a la página de asignación de patente
         header('Location: asignarPatente.php?id=' . $id_cliente . '&nuevo=1');
         exit();
     } else {
-        echo "Error al crear el cliente";
+        $error = "Error al crear el cliente";
     }
 }
 

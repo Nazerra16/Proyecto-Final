@@ -22,7 +22,7 @@
         .main-container {
             background-color: white;
             border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             padding: 2.5rem;
             margin-bottom: 2rem;
             max-width: 800px;
@@ -132,32 +132,17 @@
                 </div>
             </div>
 
-            <!-- Formulario para Asignar Nueva Patente -->
             <form action="asignarPatente.php?id=<?= $cliente->ID_Clientes ?>" method="POST">
                 <div class="row g-3">
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label for="Patente" class="form-label">Nueva Patente</label>
-                            <input type="text" class="form-control" id="Patente" name="Patente" required 
-                                   placeholder="Ingrese la patente del vehículo">
+                            <input type="text" class="form-control" id="Patente" name="Patente" required
+                                placeholder="Ingrese la patente del vehículo">
                             <small class="text-muted">Formato: ABC123 o AB123CD</small>
                         </div>
                     </div>
                 </div>
-
-                <!-- Patentes Actuales -->
-                <?php if (!empty($patentes)): ?>
-                    <div class="current-plates">
-                        <h4 class="mb-3">Patentes Actuales:</h4>
-                        <div>
-                            <?php foreach ($patentes as $patente): ?>
-                                <span class="plate-badge">
-                                    <?= $patente->Patente ?>
-                                </span>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
 
                 <div class="d-flex gap-2 justify-content-end mt-4">
                     <a href="indexClientes.php" class="btn btn-secondary btn-action">
