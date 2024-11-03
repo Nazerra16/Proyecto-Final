@@ -17,19 +17,30 @@ class Cliente extends Conexion
     }
 
     public function delete()
-{
-    $this->conectar();
-    
-    // Primero eliminamos los vehículos asociados al cliente
-    $pre = mysqli_prepare($this->con, "DELETE FROM vehiculos WHERE ID_Clientes = ?");
-    $pre->bind_param("i", $this->ID_Clientes);
-    $pre->execute();
-    
-    // Luego eliminamos al cliente
-    $pre = mysqli_prepare($this->con, "DELETE FROM clientes WHERE ID_Clientes = ?");
-    $pre->bind_param("i", $this->ID_Clientes);
-    $pre->execute();
-}
+    {
+        $this->conectar();
+        
+        // Primero obtenemos todos los vehículos del cliente
+        $vehiculos = Vehiculo::getByClienteId($this->ID_Clientes);
+        
+        // Para cada vehículo
+        foreach ($vehiculos as $vehiculo) {
+            // Primero eliminamos los lavados asociados al vehículo
+            $pre = mysqli_prepare($this->con, "DELETE FROM lavados WHERE ID_Vehiculo = ?");
+            $pre->bind_param("i", $vehiculo->ID_Vehiculo);
+            $pre->execute();
+        }
+        
+        // Luego eliminamos todos los vehículos del cliente
+        $pre = mysqli_prepare($this->con, "DELETE FROM vehiculos WHERE ID_Clientes = ?");
+        $pre->bind_param("i", $this->ID_Clientes);
+        $pre->execute();
+        
+        // Finalmente eliminamos al cliente
+        $pre = mysqli_prepare($this->con, "DELETE FROM clientes WHERE ID_Clientes = ?");
+        $pre->bind_param("i", $this->ID_Clientes);
+        $pre->execute();
+    }
 
     public function update()
     {

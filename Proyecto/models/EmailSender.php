@@ -13,8 +13,8 @@ class EmailSender {
             $mail->isSMTP();
             $mail->Host       = 'sandbox.smtp.mailtrap.io'; // Cambia esto al servidor SMTP que uses
             $mail->SMTPAuth   = true;
-            $mail->Username   = '8058f33ac0b99a'; // poner email para enviar correos
-            $mail->Password   = '3608f0888607b9'; // poner la contraseña
+            $mail->Username   = '0378f762b05b85'; // poner email para enviar correos
+            $mail->Password   = '2705eece1ede74'; // poner la contraseña
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 2525;
 
