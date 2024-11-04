@@ -16,10 +16,10 @@ class EmailSender {
             $mail->Username   = '0378f762b05b85'; // poner email para enviar correos
             $mail->Password   = '2705eece1ede74'; // poner la contraseña
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 2525;
+            $mail->Port       =  587;
 
             //Recipients
-            $mail->setFrom('algo@gmail.com', 'DANG Aviso');
+            $mail->setFrom('DANGAviso@gmail.com', 'DANG Aviso');
             $mail->addAddress($to);
 
             // Content

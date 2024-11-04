@@ -1,6 +1,6 @@
 <?php
 require_once 'Conexion.php';
-
+require_once 'Vehiculo.php';
 class Cliente extends Conexion
 {
     public $ID_Clientes, $Nombre, $Apellido, $Email, $Telefono, $ID_Usuario;

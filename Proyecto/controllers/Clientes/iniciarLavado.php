@@ -1,54 +1,50 @@
 <?php
-require_once __DIR__ . '/../../models/Lavado.php';
-require_once __DIR__ . '/../../models/Vehiculo.php';
-require_once __DIR__ . '/../../models/Cliente.php';
-require_once __DIR__ . '/../../models/Empleado.php';
-require_once __DIR__ . '/../../models/EmailSender.php';
+require_once '../../models/Lavado.php';
+require_once '../../models/Vehiculo.php';
+require_once '../../models/Cliente.php';
+require_once '../../models/Empleado.php';
+require_once '../../models/EmailSender.php';
 
-session_start();
+if (isset($_GET['id']) && isset($_GET['cliente'])) {
+    $id_vehiculo = $_GET['id'];
+    $id_cliente = $_GET['cliente'];
 
-$id_vehiculo = $_GET['id'] ?? null;
-$id_cliente = $_GET['cliente'] ?? null;
+    // Obtener un empleado válido
+    $empleados = Empleado::all(); // Obtener todos los empleados
 
-if (!$id_vehiculo || !$id_cliente) {
-    header('Location: indexClientes.php');
-    exit();
-}
+    if (empty($empleados)) {
+        echo "Error: No hay empleados disponibles para asignar al lavado";
+        exit;
+    }
 
-$vehiculo = Vehiculo::getById($id_vehiculo);
-$cliente = Cliente::getById($id_cliente);
-$empleado = Empleado::getById($_SESSION['user_id']);
+    // Usar el primer empleado disponible o implementar tu propia lógica de selección
+    $empleado = $empleados[0];
 
-if ($vehiculo && $cliente && $empleado) {
+    // Crear una nueva instancia de Lavado
     $lavado = new Lavado();
     $lavado->ID_Vehiculo = $id_vehiculo;
-    $lavado->ID_Empleado = $empleado->ID_Empleado;
+    $lavado->ID_Empleado = $empleado->ID_Empleado; // Usar un ID de empleado válido
 
     if ($lavado->iniciarLavado()) {
-        $fechaHora = date('Y-m-d H:i:s');
-        $subject = "Inicio de lavado de su vehículo";
-        $body = "
-        <h2>Inicio de Lavado</h2>
-        <p>Estimado/a {$cliente->Nombre} {$cliente->Apellido},</p>
-        <p>Le informamos que hemos comenzado el lavado de su vehículo:</p>
-        <ul>
-            <li><strong>Patente:</strong> {$vehiculo->Patente}</li>
-            <li><strong>Fecha y Hora de Inicio:</strong> {$fechaHora}</li>
-            <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
-        </ul>
-        <p>Le notificaremos cuando el lavado haya finalizado.</p>
-        <p>Gracias por confiar en nuestros servicios.</p>
-        ";
+        // Obtener información del vehículo
+        $vehiculo = Vehiculo::getById($id_vehiculo);
 
-        EmailSender::sendEmail($cliente->Email, $subject, $body);
+        // Obtener información del cliente
+        $cliente = Cliente::getById($id_cliente);
+
+        // Enviar email de notificación
+        if ($cliente && $vehiculo) {
+            $to = $cliente->Email;
+            $subject = "Lavado iniciado";
+            $body = "El lavado de su vehículo con patente {$vehiculo->Patente} ha sido iniciado.";
+            EmailSender::sendEmail($to, $subject, $body);
+        }
 
         header('Location: indexClientes.php');
-        exit();
+        exit;
     } else {
-        $error = "Error al iniciar el lavado";
-        require_once __DIR__ . '/../../views/error.view.php';
+        echo "Error al iniciar el lavado";
     }
 } else {
-    header('Location: indexClientes.php');
-    exit();
+    echo "Parámetros inválidos";
 }
