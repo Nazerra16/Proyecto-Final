@@ -21,18 +21,19 @@ if ($lavado && $cliente) {
     $empleado = Empleado::getById($lavado->ID_Empleado);
 
     if ($lavado->finalizarLavado()) {
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
         $fechaHora = date('Y-m-d H:i:s');
-        $subject = "Finalización de lavado de su vehículo";
+        $subject = "Finalizacion de lavado de su vehiculo";
         $body = "
         <h2>Lavado Finalizado</h2>
         <p>Estimado/a {$cliente->Nombre} {$cliente->Apellido},</p>
-        <p>Le informamos que hemos finalizado el lavado de su vehículo:</p>
+        <p>Le informamos que hemos finalizado el lavado de su vehiculo:</p>
         <ul>
             <li><strong>Patente:</strong> {$vehiculo->Patente}</li>
-            <li><strong>Fecha y Hora de Finalización:</strong> {$fechaHora}</li>
+            <li><strong>Fecha y Hora de Finalizacion:</strong> {$fechaHora}</li>
             <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
         </ul>
-        <p>Su vehículo está listo para ser retirado.</p>
+        <p>Su vehiculo esta listo para ser retirado.</p>
         <p>Gracias por confiar en nuestros servicios.</p>
         ";
 

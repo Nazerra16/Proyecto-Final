@@ -1,9 +1,9 @@
 <?php
-require_once '../../models/Lavado.php';
-require_once '../../models/Vehiculo.php';
-require_once '../../models/Cliente.php';
-require_once '../../models/Empleado.php';
-require_once '../../models/EmailSender.php';
+require_once __DIR__ . '/../../models/Lavado.php';
+require_once __DIR__ . '/../../models/Vehiculo.php';
+require_once __DIR__ . '/../../models/Cliente.php';
+require_once __DIR__ . '/../../models/Empleado.php';
+require_once __DIR__ . '/../../models/EmailSender.php';
 
 if (isset($_GET['id']) && isset($_GET['cliente'])) {
     $id_vehiculo = $_GET['id'];
@@ -26,6 +26,8 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
     $lavado->ID_Empleado = $empleado->ID_Empleado; // Usar un ID de empleado válido
 
     if ($lavado->iniciarLavado()) {
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $fechaHora = date('Y-m-d H:i:s');
         // Obtener información del vehículo
         $vehiculo = Vehiculo::getById($id_vehiculo);
 
@@ -36,7 +38,16 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
         if ($cliente && $vehiculo) {
             $to = $cliente->Email;
             $subject = "Lavado iniciado";
-            $body = "El lavado de su vehículo con patente {$vehiculo->Patente} ha sido iniciado.";
+            $body = "
+        <h2>Lavado Iniciado</h2>
+        <p>Estimado/a {$cliente->Nombre} {$cliente->Apellido},</p>
+        <p>Le informamos que ha comenzado el lavado de su vehiculo:</p>
+        <ul>
+            <li><strong>Patente:</strong> {$vehiculo->Patente}</li>
+            <li><strong>Fecha y Hora de Inicio:</strong> {$fechaHora}</li>
+            <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
+        </ul>
+        <p>Gracias por confiar en nuestros servicios!</p>";
             EmailSender::sendEmail($to, $subject, $body);
         }
 
@@ -46,5 +57,5 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
         echo "Error al iniciar el lavado";
     }
 } else {
-    echo "Parámetros inválidos";
+    echo "Parámetros invalidos";
 }
