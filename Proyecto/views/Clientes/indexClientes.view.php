@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Clientes - DANG Aviso</title>
@@ -106,7 +105,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="main-container">
@@ -127,6 +125,11 @@
                 </div>
             </div>
 
+            <!-- Input de Búsqueda -->
+            <div class="mb-4">
+                <input type="text" id="searchInput" class="form-control" placeholder="Buscar por nombre, apellido o patente...">
+            </div>
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -139,11 +142,11 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <?php if (!empty($clientesConPatentes)): ?>
                             <?php foreach ($clientesConPatentes as $cliente): ?>
                                 <?php if ($cliente !== null): ?>
-                                    <tr>
+                                    <tr data-patentes="<?= strtolower(implode(',', array_map(fn($p) => $p->Patente, $cliente->patentes))) ?>">
                                         <td><?= $cliente->ID_Clientes ?></td>
                                         <td><?= $cliente->Nombre ?></td>
                                         <td><?= $cliente->Apellido ?></td>
@@ -196,19 +199,15 @@
                                                 <div class="btn-group">
                                                     <?php $lavadoActivo = Lavado::getLavadoActivo($patente->ID_Vehiculo); ?>
                                                     <?php if ($lavadoActivo): ?>
-                                                        <a href="finalizarLavado.php?id=<?= $lavadoActivo->ID_Limpieza ?>&cliente=<?= $cliente->ID_Clientes ?>"
-                                                            class="btn btn-warning btn-sm">
+                                                        <a href="finalizarLavado.php?id=<?= $lavadoActivo->ID_Limpieza ?>&cliente=<?= $cliente->ID_Clientes ?>" class="btn btn-warning btn-sm">
                                                             Finalizar Lavado
                                                         </a>
                                                     <?php else: ?>
-                                                        <a href="iniciarLavado.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>"
-                                                            class="btn btn-primary btn-sm">
+                                                        <a href="iniciarLavado.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>" class="btn btn-primary btn-sm">
                                                             Iniciar Lavado
                                                         </a>
                                                     <?php endif; ?>
-                                                    <a href="deletePatente.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>"
-                                                        class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('¿Está seguro de eliminar esta patente?')">
+                                                    <a href="deletePatente.php?id=<?= $patente->ID_Vehiculo ?>&cliente=<?= $cliente->ID_Clientes ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar esta patente?')">
                                                         <i class="fas fa-trash"></i>
                                                     </a>
                                                 </div>
@@ -224,6 +223,22 @@
                 </div>
             <?php endforeach; ?>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+            <script>
+                document.getElementById('searchInput').addEventListener('input', function() {
+                    const searchValue = this.value.toLowerCase();
+                    const tableRows = document.querySelectorAll('#tableBody tr');
+
+                    tableRows.forEach(row => {
+                        const rowText = row.textContent.toLowerCase();
+                        const patentes = row.getAttribute('data-patentes') || '';
+
+                        // Filtra si el texto de búsqueda coincide con el contenido visible o con el atributo data-patentes
+                        row.style.display = rowText.includes(searchValue) || patentes.includes(searchValue) ? '' : 'none';
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</body>
 </html>

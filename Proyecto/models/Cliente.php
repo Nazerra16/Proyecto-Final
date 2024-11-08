@@ -9,7 +9,7 @@ class Cliente extends Conexion
     {
         $this->conectar();
         $pre = mysqli_prepare($this->con, "INSERT INTO clientes (Nombre, Apellido, Email, Telefono) VALUES (?, ?, ?, ?)");
-        $pre->bind_param("sssi", $this->Nombre, $this->Apellido, $this->Email, $this->Telefono);
+        $pre->bind_param("ssss", $this->Nombre, $this->Apellido, $this->Email, $this->Telefono);
         if ($pre->execute()) {
             return $this->con->insert_id;
         }
@@ -46,7 +46,7 @@ class Cliente extends Conexion
     {
         $this->conectar();
         $pre = mysqli_prepare($this->con, "UPDATE clientes SET Nombre = ?, Apellido = ?, Email = ?, Telefono = ? WHERE ID_Clientes = ?");
-        $pre->bind_param("sssii", $this->Nombre, $this->Apellido, $this->Email, $this->Telefono, $this->ID_Clientes);
+        $pre->bind_param("ssssi", $this->Nombre, $this->Apellido, $this->Email, $this->Telefono, $this->ID_Clientes);
         $pre->execute();
     }
 
