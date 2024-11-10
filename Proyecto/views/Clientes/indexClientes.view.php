@@ -116,8 +116,7 @@
                 <div class="d-flex gap-2">
                     <a href="../dashboard.php" class="btn btn-secondary btn-action">
                         <i class="fas fa-arrow-left me-2"></i>
-                        Volver al Dashboard
-                    </a>
+                        Volver a Inicio
                     <a href="createClientes.php" class="btn btn-primary btn-action">
                         <i class="fas fa-plus me-2"></i>
                         Nuevo Cliente

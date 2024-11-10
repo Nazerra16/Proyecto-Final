@@ -94,7 +94,7 @@
                 <div class="d-flex gap-2">
                     <a href="../dashboard.php" class="btn btn-secondary btn-action">
                         <i class="fas fa-arrow-left me-2"></i>
-                        Volver al Dashboard
+                        Volver a Inicio
                     </a>
                     <a href="createEmpleados.php" class="btn btn-primary btn-action">
                         <i class="fas fa-plus me-2"></i>

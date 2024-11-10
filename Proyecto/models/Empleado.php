@@ -14,7 +14,7 @@ class Empleado extends Conexion
     }
 
     public function delete()
-    { // Método para eliminar un empleado
+    {
 
         $this->conectar();
         $pre = mysqli_prepare($this->con, "DELETE FROM empleados WHERE ID_Empleado =  ?");

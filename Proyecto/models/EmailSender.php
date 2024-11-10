@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\DANG AVISO\Proyecto-Final\vendor\autoload.php';
+require 'C:\xampp\htdocs\ProyectoFinal\Proyecto-Final\vendor\autoload.php';
 
 class EmailSender {
     public static function sendEmail($to, $subject, $body) {
@@ -13,8 +13,8 @@ class EmailSender {
             $mail->isSMTP();
             $mail->Host       = 'sandbox.smtp.mailtrap.io'; // Cambia esto al servidor SMTP que uses
             $mail->SMTPAuth   = true;
-            $mail->Username   = '52f45a596551df'; // poner email para enviar correos
-            $mail->Password   = '8525ea78493d89'; // poner la contraseña
+            $mail->Username   = '47a17a8ef56db5'; // poner email para enviar correos
+            $mail->Password   = '3ee83a7acb9f59'; // poner la contraseña
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       =  2525;
 

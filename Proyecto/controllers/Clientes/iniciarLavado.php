@@ -9,7 +9,6 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
     $id_vehiculo = $_GET['id'];
     $id_cliente = $_GET['cliente'];
 
-    // Obtener un empleado válido
     $empleados = Empleado::all(); // Obtener todos los empleados
 
     if (empty($empleados)) {
@@ -17,7 +16,7 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
         exit;
     }
 
-    // Usar el primer empleado disponible o implementar tu propia lógica de selección
+
     $empleado = $empleados[0];
 
     // Crear una nueva instancia de Lavado
@@ -47,6 +46,7 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
             <li><strong>Fecha y Hora de Inicio:</strong> {$fechaHora}</li>
             <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
         </ul>
+        <p>Cualquier consulta comuniquese al: 3400580754</p>
         <p>Gracias por confiar en nuestros servicios!</p>";
             EmailSender::sendEmail($to, $subject, $body);
         }

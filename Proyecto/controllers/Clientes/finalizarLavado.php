@@ -34,6 +34,7 @@ if ($lavado && $cliente) {
             <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
         </ul>
         <p>Su vehiculo esta listo para ser retirado.</p>
+        <p>Cualquier consulta comuniquese al: 3400580754</p>
         <p>Gracias por confiar en nuestros servicios.</p>
         ";
 
