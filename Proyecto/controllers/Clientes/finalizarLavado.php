@@ -31,7 +31,6 @@ if ($lavado && $cliente) {
         <ul>
             <li><strong>Patente:</strong> {$vehiculo->Patente}</li>
             <li><strong>Fecha y Hora de Finalizacion:</strong> {$fechaHora}</li>
-            <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
         </ul>
         <p>Su vehiculo esta listo para ser retirado.</p>
         <p>Cualquier consulta comuniquese al: 3400580754</p>

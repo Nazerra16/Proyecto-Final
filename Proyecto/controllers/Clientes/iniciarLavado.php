@@ -44,7 +44,6 @@ if (isset($_GET['id']) && isset($_GET['cliente'])) {
         <ul>
             <li><strong>Patente:</strong> {$vehiculo->Patente}</li>
             <li><strong>Fecha y Hora de Inicio:</strong> {$fechaHora}</li>
-            <li><strong>Empleado a cargo:</strong> {$empleado->Nombre} {$empleado->Apellido}</li>
         </ul>
         <p>Cualquier consulta comuniquese al: 3400580754</p>
         <p>Gracias por confiar en nuestros servicios!</p>";
