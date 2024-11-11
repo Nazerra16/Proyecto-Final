@@ -86,7 +86,7 @@
                 </h2>
             </div>
 
-            <form action="updateEmpleados.php?id=<?= $empleado->ID_Empleados ?>" method="POST">
+            <form action="updateEmpleados.php?id=<?= $empleado->ID_Empleado ?>" method="POST">
                 <div class="row g-3">
                     <div class="col-md-6">
                         <div class="mb-3">

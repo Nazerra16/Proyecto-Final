@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../models/Empleado.php';
 
 $id = $_GET['id']; //obtenemos id por url
 
-if (isset($_POST['actualizarDatos'])) { //si se aprieta el boton  de actualizar
+if (isset($_POST['actualizarEmpleado'])) { //si se aprieta el boton  de actualizar
     //escribimos los nuevos datos
     $nombre = $_POST['Nombre'];
     $apellido = $_POST['Apellido'];

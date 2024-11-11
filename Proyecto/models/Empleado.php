@@ -34,7 +34,7 @@ class Empleado extends Conexion
     {
         $conexion = new Conexion();
         $conexion->conectar();
-        $result = mysqli_prepare($conexion->con, "SELECT * FROM Empleados");
+        $result = mysqli_prepare($conexion->con, "SELECT * FROM empleados");
         $result->execute();
         $valoresDb = $result->get_result();
         $Empleados = [];
